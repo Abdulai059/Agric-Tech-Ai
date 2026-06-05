@@ -88,7 +88,7 @@ export default function Features() {
  
       <div className="relative max-w-7xl mx-auto">
  
-        {/* Section Header */}
+        {/* Section Header. */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-20 gap-8">
           <div className="max-w-xl">
             <div className="flex items-center gap-3 mb-5">
@@ -147,7 +147,7 @@ export default function Features() {
   {features.map((feature, index) => (
     <div
       key={feature.title}
-      onMouseEnter={() => setHoveredIndex(index)}
+      // onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
       className="
         relative

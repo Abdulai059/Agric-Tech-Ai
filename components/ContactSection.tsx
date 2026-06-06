@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function ContactSection() {
   return (
     <section className="py-20 md:px-4 px-4">
-      <div className="mx-auto max-w-7xl rounded-[32px] border border-neutral-200 bg-[#fafafa] md:p-6 p-0 md:p-10">
+      <div className="mx-auto max-w-7xl rounded-sm border border-neutral-200 bg-[#fafafa] md:p-6 pt-10 md:p-10">
 
         <div className="mb-8 px-4 md:px-0">
           <p className="text-sm font-medium text-lime-600 mb-2">Contact Us</p>

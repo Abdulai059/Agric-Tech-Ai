@@ -81,7 +81,7 @@ export default function Features() {
 
   return (
     <section
-      className="relative pb-24 md:py-32 px-4 md:px-14 overflow-hidden"
+      className="relative pb-24 md:py-20 px-4 md:px-14 overflow-hidden"
 
     >
 

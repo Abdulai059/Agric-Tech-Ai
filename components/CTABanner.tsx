@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function CTABanner() {
   return (
     <section className="">
-      <div className="max-w-7xl mx-auto bg-[#0a140a] my-10 py-10 md:px-6 px-4 md:px-14 md:rounded-lg">
+      <div className="max-w-7xl mx-auto bg-[#0a140a] my-10 py-10 md:py-15 md:px-6 px-4 md:px-14 md:rounded-lg">
         <div className="relative rounded-3xl overflow-hidden bg-lime px-10 md:px-16 py-16 md:py-20 flex flex-col md:flex-row items-center justify-between gap-8">
 
           {/* Decorative circles */}

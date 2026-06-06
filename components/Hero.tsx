@@ -38,7 +38,7 @@ export default function Hero() {
               Discover how cutting-edge technology, real-time insights, and precision tools are transforming traditional farming into a more productive, sustainable, and resilient industry.
             </p>
             <button
-              className="hero-cta flex items-center gap-2 bg-[#b8f225] text-black font-semibold text-sm px-6 py-3.5 rounded-full hover:bg-[#cff63d] transition-all duration-300 group"
+              className="hero-cta flex items-center gap-2 bg-[#b8f225] text-black font-semibold text-sm px-6 py-3 rounded-full hover:bg-[#cff63d] transition-all duration-300 group"
            
             >
               Get Started

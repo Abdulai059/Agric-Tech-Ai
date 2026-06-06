@@ -12,7 +12,7 @@
 @layer base {
   :root {
     /* --lime: #b8f225;    */
-    --lime: #d0f24c; 
+    --lime: #d0f24c;
     --dark: #0f1a0e;
     --gray-light: #f8f8f8
   }
@@ -31,9 +31,11 @@
   ::-webkit-scrollbar {
     width: 6px;
   }
+
   ::-webkit-scrollbar-track {
     background: #0f1a0e;
   }
+
   ::-webkit-scrollbar-thumb {
     background: #b8f225;
     border-radius: 3px;
@@ -45,6 +47,7 @@
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -55,8 +58,13 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: #a3a3a3;
+}

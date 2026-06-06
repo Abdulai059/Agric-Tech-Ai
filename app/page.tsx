@@ -14,7 +14,7 @@ export default function Home() {
       <CropDetection />
       <Features />
       <CTABanner />
-       <ContactSection />
+      <ContactSection />
       <Footer />
     </main>
   );

@@ -1,105 +1,202 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
-const NAV_ITEMS = ["Home", "About Us", "Services", "Our Products", "Technology"];
+const NAV_ITEMS = [
+  "Home",
+  "About Us",
+  "Services",
+  "Our Products",
+  "Technology",
+];
 
 export default function Navbar() {
   const [active, setActive] = useState("Home");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "auto";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [menuOpen]);
 
   return (
-   <nav className="fixed top-0 left-0 right-0 z-50">
-  <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-0 py-5">
-    {/* Logo */}
-      <div className="text-white font-bold tracking-[0.18em] text-sm md:text-base uppercase font-syne">
-        PAULVANTE
-      </div>
+    <>
+<nav
+  className={`
+    fixed inset-x-0 top-0 z-50
+    transition-all duration-500
+    ${
+      scrolled
+        ? "bg-black/70 backdrop-blur-xl md:bg-transparent md:backdrop-blur-none"
+        : "bg-transparent backdrop-blur-none"
+    }
+  `}
+>
+        <div
+          className={`
+            max-w-7xl mx-auto
+            flex items-center justify-between
+            px-5 lg:px-0 
+            transition-all duration-500
+            ${scrolled ? "py-3" : "py-5"}
+          `}
+        >
+          {/* Logo */}
+          <div className="text-white font-bold tracking-[0.2em] uppercase text-sm md:text-base">
+            PAULVANTE
+          </div>
 
-      {/* Desktop Nav */}
-      <div className="hidden md:flex  bg-black/40 backdrop-blur-md border-b border-white/10 rounded-full p-[6px_8px] items-center gap-1">
-        {NAV_ITEMS.map((item) => {
-          const isActive = active === item;
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center rounded-full bg-black/60 backdrop-blur-xl  border border-white/10 p-1.5">
+            {NAV_ITEMS.map((item) => {
+              const isActive = active === item;
 
-          return (
-            <button
-              key={item}
-              onClick={() => setActive(item)}
-              className={[
-                "px-[18px] py-2 rounded-full text-[15px] font-medium transition-all",
-                "cursor-pointer whitespace-nowrap",
-                isActive
-                  ? "bg-lime text-dark font-semibold"
-                  : "text-white/80 hover:text-white"
-              ].join(" ")}
+              return (
+                <button
+                  key={item}
+                  onClick={() => setActive(item)}
+                  className={`
+                    relative px-5 py-2.5 rounded-full
+                    text-sm font-medium transition-all duration-300
+                    ${
+                      isActive
+                        ? "bg-[#b8f225] text-black"
+                        : "text-white/80 hover:text-white"
+                    }
+                  `}
+                >
+                  {item}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Desktop CTA */}
+          <button
+            className="
+              hidden md:flex items-center gap-3
+              rounded-full bg-[#b8f225]
+              px-5 py-2
+              font-semibold text-black
+              transition-all duration-300
+              hover:scale-105
+              hover:bg-[#d0f64a]
+            "
+          >
+            Contact Us
+
+            <span
+              className="
+                flex h-8 w-8 items-center justify-center
+                rounded-full bg-black
+                transition-transform duration-300
+                group-hover:rotate-45
+              "
             >
-              {item}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* CTA Desktop */}
-      <div className="hidden md:flex items-center">
-        <button className="flex items-center gap-2 bg-[#b8f225] text-black font-semibold text-sm px-5 py-3 rounded-full hover:bg-[#cff63d] transition-all duration-300 group">
-          Contact Us
-
-          <span className="w-6 h-6 bg-black rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-              <path
-                d="M2 10L10 2M10 2H4M10 2V8"
-                stroke="#b8f225"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <ArrowUpRight
+                size={14}
+                className="text-[#b8f225]"
               />
-            </svg>
-          </span>
-        </button>
-      </div>
+            </span>
+          </button>
 
-      {/* Mobile Button */}
-      <button
-        className="md:hidden text-white p-2"
-        onClick={() => setMenuOpen((v) => !v)}
-      >
-        <div className={`w-6 h-0.5 bg-white mb-1.5 transition-transform ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-        <div className={`w-6 h-0.5 bg-white mb-1.5 transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
-        <div className={`w-6 h-0.5 bg-white transition-transform ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-      </button>
+          {/* Mobile Menu Button */}
+          <button
+            className="relative md:hidden h-10 w-10"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span
+              className={`
+                absolute left-2 top-3 h-0.5 w-6 bg-white
+                transition-all duration-300
+                ${menuOpen ? "rotate-45 translate-y-2" : ""}
+              `}
+            />
 
-      {/* Mobile Menu */}
+            <span
+              className={`
+                absolute left-2 top-5 h-0.5 w-6 bg-white
+                transition-all duration-300
+                ${menuOpen ? "opacity-0" : ""}
+              `}
+            />
+
+            <span
+              className={`
+                absolute left-2 top-7 h-0.5 w-6 bg-white
+                transition-all duration-300
+                ${menuOpen ? "-rotate-45 -translate-y-2" : ""}
+              `}
+            />
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Fullscreen Menu */}
       <div
-        className={`md:hidden absolute top-full left-0 right-0 bg-black/90 backdrop-blur-xl border-t border-white/10 p-6 flex flex-col gap-4 transition-all duration-300 ${
-          menuOpen ? "opacity-100 translate-y-0" : "opacity-0 pointer-events-none -translate-y-2"
-        }`}
+        className={`
+          md:hidden fixed inset-0 z-40
+          bg-black/95 backdrop-blur-2xl
+          transition-all duration-500
+          ${
+            menuOpen
+              ? "opacity-100 visible"
+              : "opacity-0 invisible"
+          }
+        `}
       >
-        {NAV_ITEMS.map((item) => {
-          const isActive = active === item;
-
-          return (
+        <div className="flex h-full flex-col justify-center px-8">
+          {NAV_ITEMS.map((item) => (
             <button
               key={item}
               onClick={() => {
                 setActive(item);
                 setMenuOpen(false);
               }}
-              className={`text-left text-base font-medium py-2 transition-colors ${
-                isActive ? "text-[#b8f225]" : "text-white/80 hover:text-white"
-              }`}
+              className={`
+                py-5 text-left text-3xl font-semibold
+                transition-colors duration-300
+                ${
+                  active === item
+                    ? "text-[#b8f225]"
+                    : "text-white"
+                }
+              `}
             >
               {item}
             </button>
-          );
-        })}
+          ))}
 
-        <button className="flex items-center gap-2 bg-[#b8f225] text-black font-semibold text-sm px-5 py-3 rounded-full w-fit mt-2">
-          Contact Us
-        </button>
+          <button
+            className="
+              mt-8 rounded-full
+              bg-[#b8f225]
+              px-6 py-4
+              text-lg font-semibold
+              text-black
+            "
+          >
+            Contact Us
+          </button>
+        </div>
       </div>
-  </div>
-</nav>
+    </>
   );
 }
-
-
